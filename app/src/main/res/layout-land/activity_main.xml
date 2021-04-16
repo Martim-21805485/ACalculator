@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_historic"
             android:layout_width="0dp"
             android:layout_height="match_parent"
