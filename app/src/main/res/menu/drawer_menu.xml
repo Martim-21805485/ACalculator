@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_cal"
+            android:icon="@drawable/ic_calculator"
+            android:title="@string/calculatorD"
+            />
+
+        <item
+            android:id="@+id/nav_his"
+            android:icon="@drawable/ic_history"
+            android:title="@string/historyD"
+            />
+
+
+    </group>
+
+    <item
+        android:title="@string/otherD">
+
+        <menu>
+            <item android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/outD"/>
+        </menu>
+    </item>
+
+
+</menu>

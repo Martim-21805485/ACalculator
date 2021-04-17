@@ -3,4 +3,15 @@
     <string name="back">DEL</string>
     <string name="delete">C</string>
     <string name="history">H</string>
+
+
+    <!-- Drawer-->
+    <string name="calculatorD">Calculadora</string>
+    <string name="historyD">Historico</string>
+    <string name="otherD">Outros</string>
+    <string name="outD">Sair</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
 </resources>
