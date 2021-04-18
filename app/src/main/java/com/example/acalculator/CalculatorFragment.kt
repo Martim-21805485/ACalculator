@@ -3,6 +3,7 @@ package com.example.acalculator
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Path
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
@@ -16,13 +17,15 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
+import kotlinx.android.synthetic.main.fragment_history.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.util.*
 import kotlin.collections.ArrayList
 
+var list = mutableListOf<Operation>(Operation("1+1",2.0))
+
 class CalculatorFragment : Fragment() {
     private val VISOR_KEY = "visor"
-    private val list = mutableListOf(Operation("1+1",2.0))
     private var historyAdapter: HistoryAdapter? = null
     private var lastCal = "";
 
@@ -37,6 +40,7 @@ class CalculatorFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         button_C.setOnClickListener{
             text_visor.text = ""
         }
@@ -48,14 +52,7 @@ class CalculatorFragment : Fragment() {
         }
 
         button_equals.setOnClickListener{ onClickEquals() }
-        val orientation = this.resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // code for portrait mode
-        } else {
-            historyAdapter = HistoryAdapter(activity as Context, R.layout.item_expression, list as ArrayList<Operation>)
-            list_historicLand.layoutManager = LinearLayoutManager(activity as Context)
-            list_historicLand.adapter = historyAdapter
-        }
+
     }
 
     @Optional
@@ -70,9 +67,8 @@ class CalculatorFragment : Fragment() {
     }
 
     fun onClickHistory(){
-        val intent = Intent(activity as Context , HistoryFragment::class.java)
-        intent.apply { putExtra(EXTRA_HISTORY, ArrayList(list)) }
-        activity?.supportFragmentManager?.let { NavigationManager.goToHistoryFragment(it) }
+        var bundle = arguments
+        NavigationManager.goToHistoryFragment(activity?.supportFragmentManager!!,bundle!!)
 
     }
 
@@ -84,13 +80,8 @@ class CalculatorFragment : Fragment() {
             val expression = ExpressionBuilder(text_visor.text.toString()).build()
             text_visor.text = expression.evaluate().toString()
             lastCal += "=${text_visor.text}"
-            list.add(Operation(exp,expression.evaluate()))
-            val orientation = this.resources.configuration.orientation
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                // code for portrait mode
-            } else {
-                historyAdapter?.notifyDataSetChanged()
-            }
+            list?.add(Operation(exp,expression.evaluate()))
+            arguments?.putParcelableArrayList(EXTRA_HISTORY,ArrayList(list))
         } catch (e: IllegalArgumentException) {
             // handler
         }

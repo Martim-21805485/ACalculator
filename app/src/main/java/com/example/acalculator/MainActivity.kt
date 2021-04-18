@@ -21,12 +21,18 @@ import kotlin.collections.ArrayList
 const val EXTRA_HISTORY = "com.example.acalculator.HISTORY"
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    var bundleListH = Bundle()
+    private var list = mutableListOf(Operation("1+1",2.0))
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bundleListH.putParcelableArrayList(EXTRA_HISTORY,ArrayList(list))
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
+        NavigationManager.goToCalculatorFragment(supportFragmentManager,bundleListH)
     }
 
     private fun setupDrawerMenu(){
@@ -38,8 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.nav_cal -> NavigationManager.goToCalculatorFragment(supportFragmentManager)
-            R.id.nav_his -> NavigationManager.goToHistoryFragment(supportFragmentManager)
+            R.id.nav_cal -> NavigationManager.goToCalculatorFragment(supportFragmentManager,bundleListH)
+            R.id.nav_his -> NavigationManager.goToHistoryFragment(supportFragmentManager,bundleListH)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
