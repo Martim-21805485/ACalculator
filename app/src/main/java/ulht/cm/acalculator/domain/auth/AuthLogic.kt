@@ -14,15 +14,13 @@ class AuthLogic (private val retrofit: Retrofit) {
 
     private val TAG = AuthLogic::class.java.simpleName
 
-    fun authenticateUser(email: String, password: String){
+     fun authenticateUser(email: String, password: String) {
         val service = retrofit.create(AuthService::class.java)
+        var login = false
         CoroutineScope(Dispatchers.IO).launch{
             val response = service.login(Login(email,password))
             if(response.isSuccessful){
-                Log.i(TAG,"response.isSuccessful")
-                Log.i(TAG, response.body().toString())
-            }else{
-                Log.i(TAG,"response.isNOTSuccessful")
+
             }
         }
     }

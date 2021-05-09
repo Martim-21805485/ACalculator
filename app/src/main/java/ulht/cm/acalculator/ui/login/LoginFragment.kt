@@ -11,9 +11,11 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_login.*
 import ulht.cm.acalculator.R
+import ulht.cm.acalculator.ui.listeners.OnLoginTrue
+import ulht.cm.acalculator.ui.utils.NavigationManager
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), OnLoginTrue {
 
     private lateinit var viewModel: LoginViewModel
 
@@ -27,14 +29,19 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        viewModel.registerListener(this)
     }
 
     @OnClick(R.id.login)
-    fun onClickLogin(view: View){
+     fun onClickLogin(view: View){
         Log.i("Login",emailInput.text.toString())
         Log.i("Password",passwordInput.text.toString())
         viewModel.onClickButtonLogin(emailInput.text.toString(),passwordInput.text.toString())
 
+    }
+
+    override fun onLoginTrue() {
+        activity?.let { NavigationManager.goToCalculatorFragment(it.supportFragmentManager) }
     }
 
 }
