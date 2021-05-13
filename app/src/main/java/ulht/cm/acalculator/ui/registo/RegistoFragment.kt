@@ -1,4 +1,4 @@
-package ulht.cm.acalculator.ui.login
+package ulht.cm.acalculator.ui.registo
 
 import android.os.Bundle
 import android.util.Log
@@ -10,19 +10,23 @@ import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.emailInput
+import kotlinx.android.synthetic.main.fragment_login.passwordInput
+import kotlinx.android.synthetic.main.fragment_registo.*
 import ulht.cm.acalculator.R
 import ulht.cm.acalculator.ui.callback.login
+import ulht.cm.acalculator.ui.callback.registo
 import ulht.cm.acalculator.ui.utils.NavigationManager
 
 
-class LoginFragment : Fragment(), login {
+class RegistoFragment : Fragment(), registo {
 
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: RegistoViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        val view = inflater.inflate(R.layout.fragment_registo, container, false)
+        viewModel = ViewModelProviders.of(this).get(RegistoViewModel::class.java)
         ButterKnife.bind(this, view)
         return view
     }
@@ -32,21 +36,19 @@ class LoginFragment : Fragment(), login {
     }
 
     @OnClick(R.id.login)
-     fun onClickLogin(view: View){
+     fun onClickRegisto(view: View){
         Log.i("Login",emailInput.text.toString())
         Log.i("Password",passwordInput.text.toString())
-        viewModel.onClickButtonLogin(this,emailInput.text.toString(),passwordInput.text.toString())
+        viewModel.onClickButtonRegisto(this,emailInput.text.toString(),passwordInput.text.toString(),nomeInput.text.toString())
 
     }
 
-    override fun onLoginTrue(token: String) {
-        User.getInstance().token = token
+    override fun onRegisto() {
         activity?.let {
-            NavigationManager.goToCalculatorFragment(
+            NavigationManager.goToLoginFragment(
                 it.supportFragmentManager
             )
         }
     }
-
 
 }

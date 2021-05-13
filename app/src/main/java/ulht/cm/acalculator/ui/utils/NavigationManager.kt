@@ -6,6 +6,7 @@ import ulht.cm.acalculator.R
 import ulht.cm.acalculator.ui.calculator.CalculatorFragment
 import ulht.cm.acalculator.ui.history.HistoryFragment
 import ulht.cm.acalculator.ui.login.LoginFragment
+import ulht.cm.acalculator.ui.registo.RegistoFragment
 
 
 class NavigationManager {
@@ -29,6 +30,10 @@ class NavigationManager {
 
         fun goToLoginFragment(fm: FragmentManager){
             placeFragment(fm, LoginFragment())
+        }
+
+        fun goToRegistoFragment(fm: FragmentManager){
+            placeFragment(fm, RegistoFragment())
         }
     }
 

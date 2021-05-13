@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".ui.login.LoginFragment">
+    tools:context=".ui.MainActivity">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +36,21 @@
             android:ems="20"
             android:gravity="start"
             android:hint="********" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="50sp"/>
+        <EditText
+            android:id="@+id/nomeInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="20"
+            android:gravity="start"
+            android:hint="Maria Ines" />
+
         <Button
             android:id="@+id/login"
             android:layout_width="150dp"
@@ -44,7 +59,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            android:text="LOGIN"
+            android:text="Registo"
             android:textSize="20sp" />
 
 

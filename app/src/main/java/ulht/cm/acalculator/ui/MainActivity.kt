@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_cal -> NavigationManager.goToCalculatorFragment(supportFragmentManager)
             R.id.nav_his -> NavigationManager.goToHistoryFragment(supportFragmentManager)
             R.id.nav_login -> NavigationManager.goToLoginFragment(supportFragmentManager)
+            R.id.nav_registo -> NavigationManager.goToRegistoFragment(supportFragmentManager)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true

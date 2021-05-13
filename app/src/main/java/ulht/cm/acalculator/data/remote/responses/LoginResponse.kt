@@ -1,4 +1,11 @@
 package ulht.cm.acalculator.data.remote.responses
 
-class LoginResponse {
+import com.google.gson.annotations.SerializedName
+
+class LoginResponse() {
+
+    @SerializedName("email")
+    var email: String = ""
+    @SerializedName("token")
+    var token: String = ""
 }

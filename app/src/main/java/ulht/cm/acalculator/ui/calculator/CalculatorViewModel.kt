@@ -4,13 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import ulht.cm.acalculator.data.local.room.CalculatorDatabase
 import ulht.cm.acalculator.data.local.room.entities.Operation
+import ulht.cm.acalculator.data.remote.RetrofitBuilder
+import ulht.cm.acalculator.data.repositories.OperationRepository
 import ulht.cm.acalculator.domain.calculator.CalculatorLogic
+import ulht.cm.acalculator.ui.callback.login
+import ulht.cm.acalculator.ui.callback.operations
 import ulht.cm.acalculator.ui.listeners.OnDisplayChanged
+
+const val ENDPOINT = "https://cm-calculadora.herokuapp.com/api/"
 
 class CalculatorViewModel(application: Application): AndroidViewModel(application) {
 
     private val storage = CalculatorDatabase.getInstance(application).operationDao()
-    private val calculatorLogic = CalculatorLogic(storage)
+    private val repository =  OperationRepository(storage, RetrofitBuilder.getInstance(ulht.cm.acalculator.ui.calculator.ENDPOINT))
+    private val calculatorLogic = CalculatorLogic(repository)
 
     private var listener: OnDisplayChanged? = null
     var display: String = ""
@@ -55,8 +62,8 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         return display
     }
 
-    fun onShowList(): List<Operation>{
-        return calculatorLogic.getListOperations()
+    fun onShowList(callback: operations){
+        calculatorLogic.getListOperations(callback)
     }
 
 
